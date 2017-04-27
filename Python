@@ -1,0 +1,44 @@
+#Fannar Hrafn Haraldsson
+#Vytautas Sipavicius
+#Lokaverkefni
+from random import *
+#opna hrutar.txt í read mode til að geta notað .read() og skipti stökum eftir \n
+with open ('hrutar.txt','r') as skra:
+    #Bý til stokkin úr upplýsingum úr textaskjali
+    stokkur=skra.read().split("\n")
+#bý til gildi fyrir spil spilara
+spilari1=[]
+spilari2=[]
+#fer í gegnum stokkin með for lykkju
+for x in stokkur:
+    #bý til spil sem er listi úr einu staki í stokkinum
+    #með því að nota eval()
+    spil=eval(x)
+    #fæ handahófskennt annaðhvort 1 eða 2
+    split=randint(1,2)
+    #nota lengd stokka spilara og random töluna til að ákveða
+    #hvorn stokkin spilið ætti að bætast við.
+    if len(spilari1)<26 and split==1:
+        spilari1.append(spil)
+    #þarf þetta elif svo að báðir spilara fái jafns mörg spil
+    elif len(spilari1)==26 and split==1:
+        spilari2.append(spil)
+    elif len(spilari2)<26 and split==2:
+        spilari2.append(spil)
+    #þarf þetta elif svo að báðir spilara fái jafns mörg spil
+    elif len(spilari2)==26 and split==2:
+        spilari1.append(spil)
+madur=input("Spila móti leikmann/tölvu :")
+#byrja leik
+turnowner=spilari1
+while len(spilari1)!=52 or len(spilari2)!=52:
+    if turnowner==spilari1:
+        print("----------",spilari1[0][0]+"----------")
+        print("Þyngd:             ",spilari1[0][1])
+        print("Mjólkurl. dætra:   ",spilari1[0][2])
+        print("Einkunn ullar:     ",spilari1[0][3])
+        print("Fjöldi afkvæma:    ",spilari1[0][4])
+        print("Einkunn læris:     ",spilari1[0][5])
+        print("Frjósemi:          ",spilari1[0][6])
+        print("Þykkt bakvöðva:    ",spilari1[0][7])
+        print("Einkun fyrir malir:",spilari1[0][8])
