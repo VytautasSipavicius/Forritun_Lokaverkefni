@@ -34,30 +34,49 @@ for x in stokkur:
 geymsla=[]
 #gildi sem vísar á spilarann sem á að gera, byrjar á spilara 1
 turnowner=spilari1
+#while lykkja sem helst í gangi eins lengi og enginn spilari er búinn að safna öllum spilunum
 while len(spilari1)!=52 or len(spilari2)!=52:
+    #athuga hvort spilari1 á leik
     if turnowner==spilari1:
-        if len(spilari1[0][0])%2!=0:
-            nafn=str(spilari1[0][0]+" ")
+        #tek nafnið á hrút spilara 1 sem á að sýna og athuga hvort fjöldi stafa í nafninu sé oddatala eða ekki
+        #og bæti við einu bili á endan ef svo er til að spila valmyndin ruglist ekki
+        if len(turnowner[0][0])%2!=0:
+            nafn=str(turnowner[0][0]+" ")
         else:
-            nafn=str(spilari1[0][0])
+            nafn=str(turnowner[0][0])
+        #bý til gildi fyrir báða helminga nafnsins
         nafn1=""
         nafn2=""
+        #fer í gegnum hvern staf í nafninu og skipti nafninu í tvennt milli nafn1 og nafn2
         for x in nafn:
             if len(nafn1)!=len(nafn)/2:
                 nafn1+=x
             else:
                 nafn2+=x
-        if len(spilari1[0][0])%2!=0:
-            print("                     __             ----------- {0:>4}{1:<4}-----------".format(nafn1,nafn2)+"           __  _")
+        #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        #ég nota format til að gera svo að línurnar sem eru prentaðar eru alltaf ákveðin stærð
+        #þetta skiptir máli þar sem lömbin hægra megin við flokkana mundu ruglast ef ég gerði þetta ekki.
+        #ásamt því að ástæðan að ég þurfti að skipta nafninu á tvennt var svo að ég gæti notað þessa format
+        #aðferð til að gera það svo að það eru alltaf jafns mörg bil hægra og vinstra megin við nafnið.
+        #Þessi aðferð virkar þannig að maður lætur stök inní .format() og notar síðan {} til að segja hvar stökin
+        #eiga að birtast, {0:>5} fyrsta talan (0) bendir á fyrsta stakið inní .format, > og <  ákveða hvort á
+        #að bæta við bilum hægra(<) eða vinstra(>) megin við stakið og síðasta talan(5) segir til um hversu langt
+        #má bæta við bilum í þá átt. Þetta er mjög líkt CHAR() í SQL.
+        #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        #athuga aftur hvort fjölda stafa í nafni eru oddatala eða ekki svo ég viti hvort
+        # ég þarf að prenta línuna sem hefur bil eftir nafninu eða ekki
+        if len(turnowner[0][0])%2!=0:
+            print("                      __            ----------- {0:>4}{1:<4}-----------".format(nafn1,nafn2)+"           __  _")
         else:
-            print("                     __             ----------- {0:>4}{1:<4} -----------".format(nafn1,nafn2)+"          __  _")
+            print("                      __            ----------- {0:>4}{1:<4} -----------".format(nafn1,nafn2)+"          __  _")
         print("            ,'```--'''  ``-''-.     | 1. Þyngd:             ",'{0:<5}'.format(spilari1[0][1])+"|       .-.'  `; `-._  __  _")
-        print("          ,'            ,-- ,-'.    | 2. Mjólkurl. dætra:   ",'{0:<5}'.format(spilari1[0][2])+"|      (_,         .-:'  `; `-._")
-        print("         (//           `\"\'| 'a  \\   | 3. Einkunn ullar:     ",'{0:<5}'.format(spilari1[3][2])+"|    ,'o\"\(      (_,            )")
-        print("          |    `;         |--._/    | 4. Fjöldi afkvæma:    ",'{0:<5}'.format(spilari1[0][4])+"|  (__,-'       ,'o\"(            )>")
+        print("          ,'             ,-- ,-'.   | 2. Mjólkurl. dætra:   ",'{0:<5}'.format(spilari1[0][2])+"|      (_,         .-:'  `; `-._")
+        print("         (//            `\"\'|  'a \\  | 3. Einkunn ullar:     ",'{0:<5}'.format(spilari1[3][2])+"|    ,'o\"\(      (_,            )")
+        print("          |    `;          |--.__/  | 4. Fjöldi afkvæma:    ",'{0:<5}'.format(spilari1[0][4])+"|  (__,-'       ,'o\"(            )>")
         print("           \    _;-._,    /         | 5. Einkunn læris:     ",'{0:<5}'.format(spilari1[0][5])+"|      (       (__,-'            )")
         print("            \__/\\\   \__,'          | 6. Frjósemi:          ",'{0:<5}'.format(spilari1[0][6])+"|       `-'._.--._(             )")
         print("             ||  `'   \|\\\\          | 7. Þykkt bakvöðva:    ",'{0:<5}'.format(spilari1[0][7])+"|          |||  |||`-'._.--._.-'")
         print("             \\\        \\\`'         | 8. Einkun fyrir malir:",'{0:<5}'.format(spilari1[0][8])+"|                     |||  |||")
         adgerd=int(input("              `'        `'     Sláðu inn númer flokksins sem þú vilt spila: "))
+
 
