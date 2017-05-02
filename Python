@@ -2,6 +2,42 @@
 #Vytautas Sipavicius
 #Lokaverkefni
 from random import *
+#Búa til valmyndina
+print("Velkominn í hrútarspilið!")
+print("(1) Spila á móti tölvu")
+print("(2) Spila á móti öðrum spilara")
+print("(3) Lesa leikreglur")
+#Láta notendann velja það sem hann vill gera
+leiksvar = int(input("Sláðu inn töluna fyrir það sem þú vilt gera "))
+#Ef hann valdi að skoða leikreglur þá sýna þær
+if leiksvar == 3:
+    print("------------------------------------------------leikreglur------------------------------------------------")
+    print()
+    print("Hrútarspilið er hægt að spila annaðhvort á móti tölvu eða tveir saman, en spilið gengur út á það að safna ")
+    print("hrútaspilunum í sinn stokk en sá sem er fyrstur til að safna öllum 52 spilum vinnur leikinn.")
+    print()
+    print("Til að byrja með er spilunum stokkað og deilt jafnt milli leikmanna síðan draga spilarar alltaf efsta spilið")
+    print("í stokknum sínum og skiptast á að velja einn af 8 mismunandi flokkum sem koma fram á spilinu. Sá sem er með")
+    print("hærra gildi í þeim flokk sem spurt var um vinnur bæði spilin og setur þau aftast í stokkinn sinn og síðan")
+    print("eru dregin ný spil efst úr báðum stokkunum")
+    print()
+    print("Ef bæði spilin eru með sama gildi í þeim flokk sem keppt var í þá eru þau spil sett í bunka til hliðar og ný")
+    print("spil dreginn efst úr báðum stokkunum og það er aftur keppt í sama flokki þangað til annar spilarinn er með")
+    print("hærra gildi, en sá spilari fær þá spilin sem hann vann sem og spilin í bunkanum og setur þau aftast í")
+    print("stokkinn sinn. Ef það kemur fyrir að annaðhvor spilarinn á bara 1 spil eftir og það kemur upp jafntefli þá")
+    print("heldur sá spilari sínu spili á meðan hinn dregur nýtt og keppir í sama flokk.")
+    print("----------------------------------------------------------------------------------------------------------")
+    print("(1) Spila á móti tölvu")
+    print("(2) Spila á móti öðrum spilara")
+    leiksvar = int(input("Sláðu inn töluna fyrir það sem þú vilt gera "))
+#Ef notandinn valdi að spila á móti tölvu þá biðja hann um að slá inn nafnið sitt
+if leiksvar == 1:
+    spilaranafn1 = input("Sláðu inn nafnið þitt ")
+    spilaranafn2 = "Tölvan"
+#Ef notandinn valdi að spila á móti öðrum spilara þá biðja þá um að slá inn nöfnin sín
+elif leiksvar == 2:
+    spilaranafn1 = input("Sláðu inn nafnið á fyrsta spilaranum")
+    spilaranafn2 = input("Sláðu inn nafnið á seinni spilaranum")
 #opna hrutar.txt í read mode til að geta notað .read() og skipti stökum eftir \n
 with open ('hrutar.txt','r') as skra:
     #Bý til stokkin úr upplýsingum úr textaskjali
