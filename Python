@@ -11,6 +11,7 @@ print("(3) Lesa leikreglur")
 leiksvar = int(input("Sláðu inn töluna fyrir það sem þú vilt gera "))
 #Ef hann valdi að skoða leikreglur þá sýna þær
 if leiksvar == 3:
+    print("")
     print("------------------------------------------------leikreglur------------------------------------------------")
     print()
     print("Hrútarspilið er hægt að spila annaðhvort á móti tölvu eða tveir saman, en spilið gengur út á það að safna ")
@@ -27,6 +28,7 @@ if leiksvar == 3:
     print("stokkinn sinn. Ef það kemur fyrir að annaðhvor spilarinn á bara 1 spil eftir og það kemur upp jafntefli þá")
     print("heldur sá spilari sínu spili á meðan hinn dregur nýtt og keppir í sama flokk.")
     print("----------------------------------------------------------------------------------------------------------")
+    print("")
     print("(1) Spila á móti tölvu")
     print("(2) Spila á móti öðrum spilara")
     leiksvar = int(input("Sláðu inn töluna fyrir það sem þú vilt gera "))
@@ -36,8 +38,8 @@ if leiksvar == 1:
     spilaranafn2 = "Tölvan"
 #Ef notandinn valdi að spila á móti öðrum spilara þá biðja þá um að slá inn nöfnin sín
 elif leiksvar == 2:
-    spilaranafn1 = input("Sláðu inn nafnið á fyrsta spilaranum")
-    spilaranafn2 = input("Sláðu inn nafnið á seinni spilaranum")
+    spilaranafn1 = input("Sláðu inn nafnið á fyrsta spilaranum ")
+    spilaranafn2 = input("Sláðu inn nafnið á seinni spilaranum ")
 #opna hrutar.txt í read mode til að geta notað .read() og skipti stökum eftir \n
 with open ('hrutar.txt','r') as skra:
     #Bý til stokkin úr upplýsingum úr textaskjali
@@ -47,25 +49,14 @@ shuffle(stokkur)
 #bý til gildi fyrir spil spilara
 spilari1=[]
 spilari2=[]
-#fer í gegnum stokkin með for lykkju
-for x in stokkur:
-    #bý til spil sem er listi úr einu staki í stokkinum
-    #með því að nota eval()
-    spil=eval(x)
-    #fæ handahófskennt annaðhvort 1 eða 2
-    split=randint(1,2)
-    #nota lengd stokka spilara og random töluna til að ákveða
-    #hvorn stokkin spilið ætti að bætast við.
-    if len(spilari1)<26 and split==1:
-        spilari1.append(spil)
-    #þarf þetta elif svo að báðir spilara fái jafns mörg spil
-    elif len(spilari1)==26 and split==1:
-        spilari2.append(spil)
-    elif len(spilari2)<26 and split==2:
-        spilari2.append(spil)
-    #þarf þetta elif svo að báðir spilara fái jafns mörg spil
-    elif len(spilari2)==26 and split==2:
-        spilari1.append(spil)
+#gef spilari1 fyrstu helming af stokkinum, stokkur þegar randomized með shuffle
+for x in range(26):
+    spil=eval(stokkur[x])
+    spilari1.append(spil)
+#gef spilari2 seinni helming af stokkinum, stokkur þegar randomized með shuffle
+for x in range(26,52):
+    spil=eval(stokkur[x])
+    spilari2.append(spil)
 #listi með nöfnum á flokkum til að geta notað í print
 flokkalisti=["Þyngd","Mjólkurl. Dætra","Einkun Ullar","Fjöldi Afkvæma","Einkun Læris","Frjósemi","Þykkt Bakvöðva","Einkun Fyrir Malir"]
 #gildi til að geyma spil sem urðu fyrir jafntefli
@@ -73,10 +64,13 @@ geymsla=[]
 #gildi sem vísar á spilarann sem á að gera, byrjar á spilara 1
 turnowner=spilari1
 ovinur=spilari2
-#while lykkja sem helst í gangi eins lengi og enginn spilari er búinn að safna öllum spilunum
-while len(spilari1)!=52 or len(spilari2)!=52:
+#while lykkja sem inniheldur leikin
+while len(spilari1)!=52 and len(spilari2)!=52:
     #athuga hvort spilari1 á leik
     if turnowner==spilari1:
+        print("------------------------")
+        print(spilaranafn1,"á að gera")
+        print("------------------------")
         #tek nafnið á hrút spilara 1 sem á að sýna og athuga hvort fjöldi stafa í nafninu sé oddatala eða ekki
         #og bæti við einu bili á endan ef svo er til að spila valmyndin ruglist ekki
         if len(turnowner[0][0])%2!=0:
@@ -110,7 +104,7 @@ while len(spilari1)!=52 or len(spilari2)!=52:
             print("                      __            ----------- {0:>4}{1:<4} -----------".format(nafn1,nafn2)+"          __  _")
         print("            ,'```--'''  ``-''-.     | 1. Þyngd:             ",'{0:<5}'.format(spilari1[0][1])+"|       .-.'  `; `-._  __  _")
         print("          ,'             ,-- ,-'.   | 2. Mjólkurl. Dætra:   ",'{0:<5}'.format(spilari1[0][2])+"|     (_,          .-:'  `; `-._")
-        print("         (//            `\"\'|  'a \\  | 3. Einkunn Ullar:     ",'{0:<5}'.format(spilari1[3][2])+"|   ,'o \"(       (_,            )")
+        print("         (//            `\"\'|  'a \\  | 3. Einkunn Ullar:     ",'{0:<5}'.format(spilari1[0][3])+"|   ,'o \"(       (_,            )")
         print("          |    `;          |--.__/  | 4. Fjöldi Afkvæma:    ",'{0:<5}'.format(spilari1[0][4])+"|  (__,-'       ,'o\"(            )>")
         print("           \    _;-._,    /         | 5. Einkun Læris:      ",'{0:<5}'.format(spilari1[0][5])+"|     (        (__,-'            )")
         print("            \__/\\\   \__,'          | 6. Frjósemi:          ",'{0:<5}'.format(spilari1[0][6])+"|       `-'._.--._(             )")
@@ -119,68 +113,72 @@ while len(spilari1)!=52 or len(spilari2)!=52:
         #spyr um hvaða flokk á að keppa í
         adgerd=int(input("              `'        `'     Sláðu inn númer flokksins sem þú vilt spila: "))
         print("----------------------------------------------------------------------------------------------------------------------------------------")
-        #bý til þessi tvö gildi bara til að gera kóðan hreinari, gæti alveg eins notað turnowner[0][adgerd] í staðinn
-        turnownerflokkur=turnowner[0][adgerd]
-        ovinurflokkur=ovinur[0][adgerd]
         #ef turnowner vann
-        if turnownerflokkur>ovinurflokkur:
+        if turnowner[0][adgerd]>ovinur[0][adgerd]:
             #nota lista með nöfnum flokkana til að finna hvaða flokk var spilað og prenta
             print(flokkalisti[adgerd-1]+":")
             #sýni útkomur
-            print(spilaranafn1,":",turnownerflokkur)
-            print(spilaranafn2,":",ovinurflokkur)
+            print(spilaranafn1,":",turnowner[0][adgerd])
+            print(spilaranafn2,":",ovinur[0][adgerd])
             #gef nafn á hrútinum sem var verið að vinna
-            print("Þú vannst og eignaðist hrútin:",ovinur[0][0])
-            #gef fjölda spila í stokkum
-            print("Fjöldi spila hjá",spilaranafn1":",len(spilari1))
-            print("Fjölda spila hjá",spilaranafn2,len(spilari2))
+            print(spilaranafn1, "vann og eignaðist hrútin:", ovinur[0][0])
             #bæti spili sem var verið að vinna við stokkin hjá þeim sem vann
             turnowner.append(ovinur[0])
             #færi spilið sem var að vinna aftast hjá þeim sem vann
             turnowner.append(turnowner[0])
-            #pop á efsta spilið svo spilari1 á ekki tvö eintök af sama spilinu
-            turnowner.pop(0)
-            #pop á spilið sem óvinurinn var að tapa
-            ovinur.pop(0)
+            #delete á efsta spilið svo spilari1 á ekki tvö eintök af sama spilinu
+            del turnowner[0]
+            #delete á spilið sem óvinurinn var að tapa
+            del ovinur[0]
+            #gef fjölda spila í stokkum
+            print("Fjöldi spila hjá", spilaranafn1, ":", len(spilari1))
+            print("Fjölda spila hjá", spilaranafn2, ":",len(spilari2))
         #ef turnowner tapaði
-        elif turnownerflokkur<ovinurflokkur:
+        elif turnowner[0][adgerd]<ovinur[0][adgerd]:
             #nota lista með nöfnum flokkana til að finna hvaða flokk var spilað og prenta
             print(flokkalisti[adgerd-1]+":")
             #sýni útkomur
-            print(spilaranafn1,":",turnownerflokkur)
-            print(spilaranafn2,":",ovinurflokkur)
+            print(spilaranafn1,":",turnowner[0][adgerd])
+            print(spilaranafn2,":",ovinur[0][adgerd])
             #gef nafn á hrútinum sem var verið að vinna
-            print("Þú tapaðir og tapaðir hrútinum:",turnowner[0][0])
-            #gef fjölda spila í stokkum
-            print("Fjöldi spila hjá",spilaranafn1":",len(spilari1))
-            print("Fjölda spila hjá",spilaranafn2,len(spilari2))
+            print(spilaranafn2, "vann og fékk hrútinn:",turnowner[0][0])
             #bæti spili sem var verið að vinna við stokkin hjá þeim sem vann
             ovinur.append(turnowner[0])
             #færi spilið sem var að vinna aftast hjá þeim sem vann
             ovinur.append(ovinur[0])
-            #pop á efsta spilið svo spilari2 á ekki tvö eintök af sama spilinu
-            ovinur.pop(0)
-            #pop á spilið sem óvinurinn var að tapa
-            turnowner.pop(0)
+            #delete á efsta spilið svo spilari2 á ekki tvö eintök af sama spilinu
+            del ovinur[0]
+            #delete á spilið sem óvinurinn var að tapa
+            del turnowner[0]
+            # gef fjölda spila í stokkum
+            print("Fjöldi spila hjá", spilaranafn1, ":", len(spilari1))
+            print("Fjölda spila hjá", spilaranafn2, ":",len(spilari2))
         #ef það var jafntefli
-        elif turnownerflokkur==ovinurflokkur:
+        elif turnowner[0][adgerd]==ovinur[0][adgerd]:
             #nota lista með nöfnum flokkana til að finna hvaða flokk var spilað og prenta
             print(flokkalisti[adgerd-1]+":")
             #sýni útkomur
-            print(spilaranafn1,":",turnownerflokkur)
-            print(spilaranafn2,":",ovinurflokkur)
+            print(spilaranafn1,":",turnowner[0][adgerd])
+            print(spilaranafn2,":",ovinur[0][adgerd])
             #útskýri hvað mun gerast því það varð jafntefli
             print("Jafntefli, spil verða geymd og barist er aftur í sama flokki")
             print("Þangað til að annarhvor hefur unnið.")
             #bý til gildi sem munu vera notað til að vita hve mörg og á sama tíma hvað spil voru spiluð
-            turngeymsla=0
-            ovinurgeymsla=0
+            #athuga hvort annar spilari hefur bara eitt spil fyrst, annars mun það að gildið er 1 gefa villu
+            if len(turnowner)==1:
+                turngeymsla=0
+            else:
+                turngeymsla=1
+            if len(ovinur)==1:
+                ovinurgeymsla=0
+            else:
+                ovinurgeymsla=1
             #byrja while lykkju sem heldur áfram að draga ný spil þangað til að það er ekki jafntefli lengur
             while turnowner[turngeymsla][adgerd]==ovinur[ovinurgeymsla][adgerd]:
                 #prenta orrustuna hvert sinn
-                print(spilarinafn1,":",turnowner[turngeymsla][adgerd])
-                print(spilarinafn2,":",ovinur[ovinurgeymsla][adgerd])
-                #if setningar gera það svo að ef einn spilari er með eitt spil eftir þá þarf hann ekki
+                print(spilaranafn1,":",turnowner[turngeymsla][adgerd])
+                print(spilaranafn2,":",ovinur[ovinurgeymsla][adgerd])
+                #if og else setningar gera það svo að ef einn spilari er með eitt spil eftir þá þarf hann ekki
                 #að láta það spil í pottin og er það frekar hinn spilarinn sem heldur þá áfram að draga ný spil
                 if len(ovinur)!=1:
                     ovinurgeymsla+=1
@@ -188,37 +186,76 @@ while len(spilari1)!=52 or len(spilari2)!=52:
                     turngeymsla+=1
             #ef að spilari1 vann jafntefli
             if turnowner[turngeymsla][adgerd]>ovinur[ovinurgeymsla][adgerd]:
+                print(spilaranafn1,":",turnowner[turngeymsla][adgerd])
+                print(spilaranafn2,":",ovinur[ovinurgeymsla][adgerd])
                 #prenta niðurstöður
-                print("Þú vannst")
+                print(spilaranafn1, "vann")
                 print("og eignaðist hrútana: ",end="")
-                for x in range(ovinurgeymsla+1):
+                for x in range(0, ovinurgeymsla+1):
                     print(ovinur[x][0],end=", ")
                 print("")
-                #nota ovinurgeymsla til að bæta við spilum hjá þeim sem vann og fjarlæga spil hjá þeim sem tapaði
+                #Búa til tvo bráðabirgðalista til að halda utan um spil
+                turnlisti = []
+                ovinurlisti = []
+                #nota ovinurgeymsla til að bæta við spilum í bráðbirgðalistann
                 for x in range(ovinurgeymsla+1):
-                    turnowner.append(ovinur[x])
-                    ovinur.pop(x)
-                #færi spil sem voru notuð til að vinna líka aftast
+                    ovinurlisti.append(ovinur[x])
+                #Remova úr ovinalistanum þau spil sem fóru í bráðbirgðalistann
+                for stak in ovinurlisti:
+                    if stak in ovinur:
+                        ovinur.remove(stak)
+                #Bæta spilunum við aftast í turnowner listann
+                for stak in ovinurlisti:
+                    turnowner.append(stak)
+                #Geri það sama nema fyrir turnowner listann
                 for x in range(turngeymsla+1):
-                    turnowner.append(x)
-                    turnowner.pop(x)
+                    turnlisti.append(turnowner[x])
+                for stak in turnlisti:
+                    if stak in turnowner:
+                        turnowner.remove(stak)
+                for stak in turnlisti:
+                    turnowner.append(stak)
+                #gef fjölda spila í stokkum
+                print("Fjöldi spila hjá", spilaranafn1, ":", len(spilari1))
+                print("Fjölda spila hjá", spilaranafn2, ":",len(spilari2))
             #ef spilari2 vann
             elif turnowner[turngeymsla][adgerd]<ovinur[ovinurgeymsla][adgerd]:
+                print(spilaranafn1,":",turnowner[turngeymsla][adgerd])
+                print(spilaranafn2,":",ovinur[ovinurgeymsla][adgerd])
                 #prenta niðurstöður
-                print("Þú tapaðir")
-                print("og tapaðir hrútunum: ",end="")
-                for x in range(turngeymsla+1):
+                print(spilaranafn2, "vann")
+                print("og eignaðist hrútana: ",end="")
+                for x in range(0, turngeymsla+1):
                     print(turnowner[x][0],end=", ")
                 print("")
-                #nota turngeymsla til að bæta við spilum hjá þeim sem vann og fjarlæga spil hjá þeim sem tapaði
+                #Búa til tvo bráðabirgðalista til að halda utan um spil
+                turnlisti = []
+                ovinurlisti = []
+                #nota turngeymsla til að bæta við spilum í bráðabirgðalistann
                 for x in range(turngeymsla+1):
-                    ovinur.append(turnowner[x])
-                    turnowner.pop(x)
-                #færi spil sem voru notuð til að vinna líka aftast
+                    turnlisti.append(turnowner[x])
+                #Taka út þau spil sem voru í bráðabirgðalistanum úr turnowner listanum
+                for stak in turnlisti:
+                    if stak in turnowner:
+                        turnowner.remove(stak)
+                #Bæta við spilum aftast í ovinur listann
+                for stak in turnlisti:
+                    ovinur.append(stak)
+                #Geri það sama hér nema fyrir ovinur listann
                 for x in range(ovinurgeymsla+1):
-                    ovinur.append(x)
-                    ovinur.pop(x)
+                    ovinurlisti.append(ovinur[x])
+                for stak in ovinurlisti:
+                    if stak in ovinur:
+                        ovinur.remove(stak)
+                for stak in ovinurlisti:
+                    ovinur.append(stak)
+                print("Fjöldi spila hjá", spilaranafn1, ":", len(spilari1))
+                print("Fjölda spila hjá", spilaranafn2, ":",len(spilari2))
+    #þegar spilari2 á að gera
     elif turnowner==spilari2:
+        print("------------------------")
+        print(spilaranafn2,"á að gera")
+        print("------------------------")
         if leiksvar==2:
         #tek nafnið á hrút spilara 2 sem á að sýna og athuga hvort fjöldi stafa í nafninu sé oddatala eða ekki
         #og bæti við einu bili á endan ef svo er til að spila valmyndin ruglist ekki
@@ -253,7 +290,7 @@ while len(spilari1)!=52 or len(spilari2)!=52:
                 print("                      __            ----------- {0:>4}{1:<4} -----------".format(nafn1,nafn2)+"          __  _")
             print("            ,'```--'''  ``-''-.     | 1. Þyngd:             ",'{0:<5}'.format(spilari2[0][1])+"|       .-.'  `; `-._  __  _")
             print("          ,'             ,-- ,-'.   | 2. Mjólkurl. Dætra:   ",'{0:<5}'.format(spilari2[0][2])+"|     (_,          .-:'  `; `-._")
-            print("         (//            `\"\'|  'a \\  | 3. Einkunn Ullar:     ",'{0:<5}'.format(spilari2[3][2])+"|   ,'o \"(       (_,            )")
+            print("         (//            `\"\'|  'a \\  | 3. Einkunn Ullar:     ",'{0:<5}'.format(spilari2[0][3])+"|   ,'o \"(       (_,            )")
             print("          |    `;          |--.__/  | 4. Fjöldi Afkvæma:    ",'{0:<5}'.format(spilari2[0][4])+"|  (__,-'       ,'o\"(            )>")
             print("           \    _;-._,    /         | 5. Einkun Læris:      ",'{0:<5}'.format(spilari2[0][5])+"|     (        (__,-'            )")
             print("            \__/\\\   \__,'          | 6. Frjósemi:          ",'{0:<5}'.format(spilari2[0][6])+"|       `-'._.--._(             )")
@@ -264,62 +301,66 @@ while len(spilari1)!=52 or len(spilari2)!=52:
             print("----------------------------------------------------------------------------------------------------------------------------------------")
         else:
             adgerd=randint(1,8)
-        # bý til þessi tvö gildi bara til að gera kóðan hreinari, gæti alveg eins notað turnowner[0][adgerd] í staðinn
-        turnownerflokkur=turnowner[0][adgerd]
-        ovinurflokkur=ovinur[0][adgerd]
         #ef turnowner vann
-        if turnownerflokkur>ovinurflokkur:
+        if turnowner[0][adgerd]>ovinur[0][adgerd]:
             #nota lista með nöfnum flokkana til að finna hvaða flokk var spilað og prenta
             print(flokkalisti[adgerd-1]+":")
             #sýni útkomur
-            print(spilaranafn2,":",turnownerflokkur)
-            print(spilaranafn1,":",ovinurflokkur)
+            print(spilaranafn2,":",turnowner[0][adgerd])
+            print(spilaranafn1,":",ovinur[0][adgerd])
             #gef nafn á hrútinum sem var verið að vinna
-            print("Óvinurinn vann og eignaðist hrútin:",ovinur[0][0])
-            #gef fjölda spila í stokkum
-            print("Fjöldi spila hjá",spilaranafn2":",len(spilari1))
-            print("Fjölda spila hjá",spilaranafn1,len(spilari2))
+            print(spilaranafn2, "vann og eignaðist hrútin:",ovinur[0][0])
             #bæti spili sem var verið að vinna við stokkin hjá þeim sem vann
             turnowner.append(ovinur[0])
             #færi spilið sem var að vinna aftast hjá þeim sem vann
             turnowner.append(turnowner[0])
-            #pop á efsta spilið svo spilari1 á ekki tvö eintök af sama spilinu
-            turnowner.pop(0)
-            #pop á spilið sem óvinurinn var að tapa
-            ovinur.pop(0)
+            #delete á efsta spilið svo spilari1 á ekki tvö eintök af sama spilinu
+            del turnowner[0]
+            #delete á spilið sem óvinurinn var að tapa
+            del ovinur[0]
+            # gef fjölda spila í stokkum
+            print("Fjöldi spila hjá", spilaranafn1, ":", len(spilari1))
+            print("Fjölda spila hjá", spilaranafn2, ":",len(spilari2))
         #ef turnowner tapaði
-        elif turnownerflokkur<ovinurflokkur:
+        elif turnowner[0][adgerd]<ovinur[0][adgerd]:
             #nota lista með nöfnum flokkana til að finna hvaða flokk var spilað og prenta
             print(flokkalisti[adgerd-1]+":")
             #sýni útkomur
-            print(spilaranafn2,":",turnownerflokkur)
-            print(spilaranafn1,":",ovinurflokkur)
+            print(spilaranafn2,":",turnowner[0][adgerd])
+            print(spilaranafn1,":",ovinur[0][adgerd])
             #gef nafn á hrútinum sem var verið að vinna
-            print("Þú vannst og eignaðist hrútin:",turnowner[0][0])
-            #gef fjölda spila í stokkum
-            print("Fjöldi spila hjá",spilaranafn2":",len(spilari1))
-            print("Fjölda spila hjá",spilaranafn1,len(spilari2))
+            print(spilaranafn1, "vann og eignaðist hrútin:",turnowner[0][0])
             #gef nafn á hrútinum sem var verið að vinna
             ovinur.append(turnowner[0])
             #færi spilið sem var að vinna aftast hjá þeim sem vann
             ovinur.append(ovinur[0])
-            #pop á efsta spilið svo spilari2 á ekki tvö eintök af sama spilinu
-            ovinur.pop(0)
-            #pop á spilið sem óvinurinn var að tapa
-            turnowner.pop(0)
+            #delete á efsta spilið svo spilari2 á ekki tvö eintök af sama spilinu
+            del ovinur[0]
+            #del á spilið sem óvinurinn var að tapa
+            del turnowner[0]
+            # gef fjölda spila í stokkum
+            print("Fjöldi spila hjá", spilaranafn1, ":", len(spilari1))
+            print("Fjölda spila hjá", spilaranafn2, ":",len(spilari2))
         #ef það var jafntefli
-        elif turnownerflokkur==ovinurflokkur:
+        elif turnowner[0][adgerd]==ovinur[0][adgerd]:
             #nota lista með nöfnum flokkana til að finna hvaða flokk var spilað og prenta
             print(flokkalisti[adgerd-1]+":")
             #sýni útkomur
-            print(spilaranafn2,":",turnownerflokkur)
-            print(spilaranafn1,":",ovinurflokkur)
+            print(spilaranafn2,":",turnowner[0][adgerd])
+            print(spilaranafn1,":",ovinur[0][adgerd])
             #útskýri hvað mun gerast því það varð jafntefli
             print("Jafntefli, spil verða geymd og barist er aftur í sama flokki")
             print("Þangað til að annarhvor hefur unnið.")
             #bý til gildi sem munu vera notað til að vita hve mörg og á sama tíma hvað spil voru spiluð
-            turngeymsla=0
-            ovinurgeymsla=0
+            #athuga hvort annar spilari hefur bara eitt spil fyrst, annars mun það að gildið er 1 gefa villu
+            if len(turnowner)==1:
+                turngeymsla=0
+            else:
+                turngeymsla=1
+            if len(ovinur)==1:
+                ovinurgeymsla=0
+            else:
+                ovinurgeymsla=1
             #byrja while lykkju sem heldur áfram að draga ný spil þangað til að það er ekki jafntefli lengur
             while turnowner[turngeymsla][adgerd]==ovinur[ovinurgeymsla][adgerd]:
                 #prenta orrustuna hvert sinn
@@ -333,36 +374,71 @@ while len(spilari1)!=52 or len(spilari2)!=52:
                     turngeymsla+=1
             #ef að spilari2 vann jafntefli
             if turnowner[turngeymsla][adgerd]>ovinur[ovinurgeymsla][adgerd]:
+                print(spilaranafn2,":",turnowner[turngeymsla][adgerd])
+                print(spilaranafn1,":",ovinur[ovinurgeymsla][adgerd])
                 #prenta niðurstöður
-                print("Þú vannst")
+                print(spilaranafn2, "vann!")
                 print("og eignaðist hrútana: ",end="")
-                for x in range(ovinurgeymsla+1):
+                for x in range(0, ovinurgeymsla+1):
                     print(ovinur[x][0],end=", ")
                 print("")
-                #nota ovinurgeymsla til að bæta við spilum hjá þeim sem vann og fjarlæga spil hjá þeim sem tapaði
+                #Búa til tvo bráðabirgðalista til að halda utan um spil
+                turnlisti = []
+                ovinurlisti = []
+                #nota ovinurgeymsla til að bæta við spilum í bráðbirgðalistann
                 for x in range(ovinurgeymsla+1):
-                    turnowner.append(ovinur[x])
-                    ovinur.pop(x)
-                #færi spil sem voru notuð til að vinna líka aftast
+                    ovinurlisti.append(ovinur[x])
+                #Remova úr ovinalistanum þau spil sem fóru í bráðbirgðalistann
+                for stak in ovinurlisti:
+                    if stak in ovinur:
+                        ovinur.remove(stak)
+                #Bæta spilunum við aftast í turnowner listann
+                for stak in ovinurlisti:
+                    turnowner.append(stak)
+                #Geri það sama nema fyrir turnowner listann
                 for x in range(turngeymsla+1):
-                    turnowner.append(x)
-                    turnowner.pop(x)
+                    turnlisti.append(turnowner[x])
+                for stak in turnlisti:
+                    if stak in turnowner:
+                        turnowner.remove(stak)
+                for stak in turnlisti:
+                    turnowner.append(stak)
+                #gef fjölda spila í stokkum
+                print("Fjöldi spila hjá", spilaranafn1, ":", len(spilari1))
+                print("Fjölda spila hjá", spilaranafn2, ":",len(spilari2))
             #ef spilari1 vann
             elif turnowner[turngeymsla][adgerd]<ovinur[ovinurgeymsla][adgerd]:
+                print(spilaranafn2,":",turnowner[turngeymsla][adgerd])
+                print(spilaranafn1,":",ovinur[ovinurgeymsla][adgerd])
                 #prenta niðurstöður
-                print("Þú tapaðir")
+                print(spilaranafn1, "vann!")
                 print("og eignaðist hrútana: ",end="")
-                for x in range(turngeymsla+1):
+                for x in range(0, turngeymsla+1):
                     print(turnowner[x][0],end=", ")
                 print("")
-                #nota turngeymsla til að bæta við spilum hjá þeim sem vann og fjarlæga spil hjá þeim sem tapaði
+                #Búa til tvo bráðabirgðalista til að halda utan um spil
+                turnlisti = []
+                ovinurlisti = []
+                #nota turngeymsla til að bæta við spilum í bráðabirgðalistann
                 for x in range(turngeymsla+1):
-                    ovinur.append(turnowner[x])
-                    turnowner.pop(x)
-                #færi spil sem voru notuð til að vinna líka aftast
+                    turnlisti.append(turnowner[x])
+                #Taka út þau spil sem voru í bráðabirgðalistanum úr turnowner listanum
+                for stak in turnlisti:
+                    if stak in turnowner:
+                        turnowner.remove(stak)
+                #Bæta við spilum aftast í ovinur listann
+                for stak in turnlisti:
+                    ovinur.append(stak)
+                #Geri það sama hér nema fyrir ovinur listann
                 for x in range(ovinurgeymsla+1):
-                    ovinur.append(x)
-                    ovinur.pop(x)
+                    ovinurlisti.append(ovinur[x])
+                for stak in ovinurlisti:
+                    if stak in ovinur:
+                        ovinur.remove(stak)
+                for stak in ovinurlisti:
+                    ovinur.append(stak)
+                print("Fjöldi spila hjá", spilaranafn1, ":", len(spilari1))
+                print("Fjölda spila hjá", spilaranafn2, ":", len(spilari2))
     #flippa hvor spilarinn er turnowner
     if turnowner==spilari1:
         turnowner=spilari2
@@ -375,6 +451,8 @@ while len(spilari1)!=52 or len(spilari2)!=52:
         ovinur=spilari2
 #segi til um hver vann
 if len(spilari1)==52:
-    print("Þú vannst!")
+    print("---------------------")
+    print(spilaranafn1, "vann!")
 elif len(spilari2)==52:
-    print("Þú tapaðir!")
+    print("---------------------")
+    print(spilaranafn2, "vann!")
