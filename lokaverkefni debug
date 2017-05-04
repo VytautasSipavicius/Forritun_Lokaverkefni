@@ -57,8 +57,6 @@ for x in range(26):
 for x in range(26,52):
     spil=eval(stokkur[x])
     spilari2.append(spil)
-print(len(spilari1))
-print(len(spilari2))
 #listi með nöfnum á flokkum til að geta notað í print
 flokkalisti=["Þyngd","Mjólkurl. Dætra","Einkun Ullar","Fjöldi Afkvæma","Einkun Læris","Frjósemi","Þykkt Bakvöðva","Einkun Fyrir Malir"]
 #gildi til að geyma spil sem urðu fyrir jafntefli
@@ -67,8 +65,7 @@ geymsla=[]
 turnowner=spilari1
 ovinur=spilari2
 #while lykkja sem inniheldur leikin
-heildarlykkja="já"
-while len(turnowner)!=0 or len(turnowner)!=52:
+while len(spilari1)!=52 and len(spilari2)!=52:
     #athuga hvort spilari1 á leik
     if turnowner==spilari1:
         print("------------------------")
@@ -178,8 +175,6 @@ while len(turnowner)!=0 or len(turnowner)!=52:
                 ovinurgeymsla=1
             #byrja while lykkju sem heldur áfram að draga ný spil þangað til að það er ekki jafntefli lengur
             while turnowner[turngeymsla][adgerd]==ovinur[ovinurgeymsla][adgerd]:
-                print(turnowner[turngeymsla])
-                print(ovinur[ovinurgeymsla])
                 #prenta orrustuna hvert sinn
                 print(spilaranafn1,":",turnowner[turngeymsla][adgerd])
                 print(spilaranafn2,":",ovinur[ovinurgeymsla][adgerd])
@@ -368,8 +363,6 @@ while len(turnowner)!=0 or len(turnowner)!=52:
                 ovinurgeymsla=1
             #byrja while lykkju sem heldur áfram að draga ný spil þangað til að það er ekki jafntefli lengur
             while turnowner[turngeymsla][adgerd]==ovinur[ovinurgeymsla][adgerd]:
-                print(turnowner[turngeymsla])
-                print(ovinur[ovinurgeymsla])
                 #prenta orrustuna hvert sinn
                 print(spilaranafn2,":",turnowner[turngeymsla][adgerd])
                 print(spilaranafn1,":",ovinur[ovinurgeymsla][adgerd])
@@ -460,6 +453,8 @@ while len(turnowner)!=0 or len(turnowner)!=52:
         ovinur=spilari2
 #segi til um hver vann
 if len(spilari1)==52:
+    print("---------------------")
     print(spilaranafn1, "vann!")
 elif len(spilari2)==52:
+    print("---------------------")
     print(spilaranafn2, "vann!")
