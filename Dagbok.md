@@ -9,3 +9,5 @@ Fannar: Bjó til spila valmynd með ASCII list í bakgrunninum.
 ### 2.5.17
 Komun saman og kláruðum að mestu base leikinn, bættum við 2-player en rákumst síðan í villu sem er að reynast mjög erfið að finna.
 Fyrir utan villuna þá ættum við að vera búnir.
+### 4.5.17
+Fannar: lagaði nokkrar villur varðandi jafntefli, ætti að vera villulaust núna
