@@ -13,3 +13,4 @@ Fyrir utan villuna þá ættum við að vera búnir.
 Vytautas: Lagaði helstu galla í verkefninu og gerði notendaviðmótið læsilegra og skýrara
 ### 4.5.17
 Fannar: lagaði nokkrar villur varðandi jafntefli, ætti að vera villulaust núna
+Við hittumst síðan og kláruðum að laga og testa forritið til fulls
